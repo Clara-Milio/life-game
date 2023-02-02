@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 # Url to scrap
 baseUrl = 'https://www.orpi.com'
-endUrl = '?transaction=rent&resultUrl=&realEstateTypes%5B0%5D=maison&realEstateTypes%5B1%5D=appartement&locations%5B0%5D%5Bvalue%5D=lyon-7&locations%5B0%5D%5Blabel%5D=Lyon%207%20%2869007%29&agency=&minSurface=&maxSurface=&minLotSurface=&maxLotSurface=&minStoryLocation=&maxStoryLocation=&newBuild=&oldBuild=&minPrice=&maxPrice=&sort=date-down&layoutType=mixte&page=&recentlySold=false'
+endUrl = '/recherche/rent/'
 
 # proxy
 response = requests.get (baseUrl + endUrl)
