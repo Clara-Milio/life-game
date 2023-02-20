@@ -2,6 +2,8 @@
 # ensure you have pip installer
 import requests 
 from bs4 import BeautifulSoup 
+import csv
+
 # L'url du site que je souhaite Scraper
 baseUrl = 'https://www.orpi.com'
 uri = "/recherche/rent?transaction=rent&page="
@@ -65,5 +67,28 @@ urls = []
 for link in getLinks(baseUrl + uri, 4):
     print("Checking " + link)
     urls.extend(addBaseUrl(baseUrl, sousoup(link, crawlEndPoint)))
-        
 print(urls)
+
+
+# with open('personnes.csv', 'r') as file:
+#     reader = csv.DictReader(file)
+#     for row in reader: 
+#         print(row['email'])
+
+headers = ["id", "category", "link"]
+rows = []
+
+for i in range(200):
+    rows.append({
+        "id": i,
+        "category": "Generated",
+        "link": "https://www.google.com"
+    })
+
+with open('linkList.csv', 'w', newline='') as file:
+    writer = csv.DictWriter(file, fieldnames=headers)
+    writer.writeheader()
+    for row in rows:
+        writer.writerow(row)
+
+print("Done")
