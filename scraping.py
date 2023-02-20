@@ -22,21 +22,33 @@ def getLinks(url, nbPg):
 
 #fonction qui permet de "crawler" sur mon site et recuperer tous les liens sur la page visée
 def crawlEndPoint(theSoupy): 
-    divs = theSoupy.find('div', {"class": "o-grid"})
-    # for div in divs: 
-    didiv = divs.findAll('span')
+    articles = theSoupy.findAll("article")
+    # link = theSoupy.findAll("a", {"class":"c-overlay__link"})
     links = []
-    for diva in didiv:
-        a = diva.find('a')
+    cpt = 0
+    for article in articles:
+        a = article.find("a", {"class":"c-overlay__link"})
         try:
-            links.append(a['href'])
-                # print(baseUrl + a['href'])
-                # requests.get(baseUrl + a['href'])
+            links.append(baseUrl + a['href'])
+            cpt+=1
         except:
             pass
-            # print(diva)
-            # print('ERROR: No link')
-            return links
+#     # divs = theSoupy.find('div', {"class": "o-grid"})
+#     # # for div in divs: 
+#     # didiv = divs.findAll('span')
+#     # links = []
+#     ul = theSoupy.find("ul", {"class":"o-grid--1@sm"})
+#     for diva in didiv:
+#         a = diva.find('a')
+#         try:
+#             links.append(a['href'])
+#                 # print(baseUrl + a['href'])
+#                 # requests.get(baseUrl + a['href'])
+#         except:
+#             pass
+#             # print(diva)
+#             # print('ERROR: No link')
+#             return links
 
 def sousoup(url, process):
     #Instanciation de mon proxy
@@ -46,7 +58,7 @@ def sousoup(url, process):
         #je passe le contenue html de ma page dans un "parser"
         theSoupy = BeautifulSoup(response.text, 'html.parser')
         try:
-            #Je retourne l'execution de ma fonction process prenan ma SWOUP SWOUP en parametre
+            #Je retourne l'execution de ma fonction process qui prend ma SWOUP  en parametre
             return process(theSoupy)
         except Exception:
             print("ERROR: Impossible to process ! " )
@@ -60,6 +72,26 @@ def addBaseUrl(baseUrl, urls):
     for url in urls:
         res.append(baseUrl + url)
     return res
+
+
+# def getInfoPage(theSoupy):
+    # fiches = []
+    # contact = theSoupy.find("div", {"class":"coordonnees"})
+    # if contact is not None:
+    #     tabs = contact.findAll("li", {"class": "accordeon-item"})
+        # if tabs is not None:
+        #     for tab in tabs:
+                # print(tab)
+                # name = tab.find("div",{"class":"accordeon-header"})
+                # print(name.getText())
+                # coord = tab.find("div", "class": "accordeon-body")
+                # address = coord.find("p")
+                # fichenkdlk,dk,fd
+                # fiches.append(fiche)
+                # return fiches
+# exit()
+
+#     print(contacts)
 
 
 #Execution
@@ -85,10 +117,18 @@ for i in range(200):
         "link": "https://www.google.com"
     })
 
-with open('linkList.csv', 'w', newline='') as file:
+# fieldnames = ['id', 'category', 'link']
+with open('linkList.csv', 'w',  encoding="UTF8", newline='') as file:
     writer = csv.DictWriter(file, fieldnames=headers)
     writer.writeheader()
     for row in rows:
         writer.writerow(row)
+
+# with open('linkList.csv', 'r', encoding="UTF8", newline='') as file:
+#     reader = csv.DictReader(file, fieldnames=headers)
+    # fiches = []
+#     for line in reader:
+#         print(line['link'])
+#         sousoup(line["link"], getInfoPage)
 
 print("Done")
