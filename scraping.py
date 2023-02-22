@@ -3,6 +3,7 @@
 import requests 
 from bs4 import BeautifulSoup 
 import csv
+# from OrpiEntry import OrpiEntry
 
 # L'url du site que je souhaite Scraper
 baseUrl = 'https://www.orpi.com'
@@ -25,14 +26,15 @@ def crawlEndPoint(theSoupy):
     articles = theSoupy.findAll("article")
     # link = theSoupy.findAll("a", {"class":"c-overlay__link"})
     links = []
-    cpt = 0
+    # cpt = 0
     for article in articles:
         a = article.find("a", {"class":"c-overlay__link"})
         try:
             links.append(baseUrl + a['href'])
-            cpt+=1
+            # cpt+=1
         except:
             pass
+        return links
 #     # divs = theSoupy.find('div', {"class": "o-grid"})
 #     # # for div in divs: 
 #     # didiv = divs.findAll('span')
@@ -58,7 +60,7 @@ def sousoup(url, process):
         #je passe le contenue html de ma page dans un "parser"
         theSoupy = BeautifulSoup(response.text, 'html.parser')
         try:
-            #Je retourne l'execution de ma fonction process qui prend ma SWOUP  en parametre
+            #Je retourne l'execution de ma fonction process prenan ma SWOUP SWOUP en parametre
             return process(theSoupy)
         except Exception:
             print("ERROR: Impossible to process ! " )
@@ -98,7 +100,9 @@ def addBaseUrl(baseUrl, urls):
 urls = []
 for link in getLinks(baseUrl + uri, 4):
     print("Checking " + link)
+    print(sousoup(link, crawlEndPoint))
     urls.extend(addBaseUrl(baseUrl, sousoup(link, crawlEndPoint)))
+        
 print(urls)
 
 
