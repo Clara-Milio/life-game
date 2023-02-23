@@ -77,20 +77,20 @@ def addBaseUrl(baseUrl, urls):
 
 
 # def getInfoPage(theSoupy):
-    # fiches = []
-    # contact = theSoupy.find("div", {"class":"coordonnees"})
-    # if contact is not None:
-    #     tabs = contact.findAll("li", {"class": "accordeon-item"})
-        # if tabs is not None:
-        #     for tab in tabs:
-                # print(tab)
-                # name = tab.find("div",{"class":"accordeon-header"})
-                # print(name.getText())
-                # coord = tab.find("div", "class": "accordeon-body")
-                # address = coord.find("p")
-                # fichenkdlk,dk,fd
-                # fiches.append(fiche)
-                # return fiches
+#     fiches = []
+#     contact = theSoupy.find("div", {"class":"coordonnees"})
+#     if contact is not None:
+#         tabs = contact.findAll("li", {"class": "accordeon-item"})
+#         if tabs is not None:
+#             for tab in tabs:
+#                 print(tab)
+#                 name = tab.find("div",{"class":"accordeon-header"})
+#                 print(name.getText())
+#                 coord = tab.find("div", "class": "accordeon-body")
+#                 address = coord.find("p")
+#                 fichenkdlk,dk,fd
+#                 fiches.append(fiche)
+#                 return fiches
 # exit()
 
 #     print(contacts)

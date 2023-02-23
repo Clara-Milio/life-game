@@ -96,7 +96,7 @@ with open("linkList.csv", 'r', encoding="UTF8", newline='') as file:
     for row in reader:
         if i < 30:
         # print(row['link'])
-            fiches.extend(theSoupy(row['link'], getInfoByPage, fileWriter))
+            fiches.extend(theSoupy(row['link'], getInfoByPage))
             i += 1
 print(fiches)
 
