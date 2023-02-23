@@ -9,8 +9,8 @@ import re
 
 
 # L'url du site que je souhaite Scraper
-baseUrl = 'https://www.instant-gaming.com'
-uri = "fr/rechercher/?type%5B0%5D=steam&page="
+baseUrl = 'https://www.pagesjaunes.fr'
+uri = "/activites/boulangerie-patisserie.html"
 
 #Genere des liens avec l'argument "page" qui s'incrémente
 def getLinks(url, nbPg):
@@ -27,8 +27,8 @@ def getLinks(url, nbPg):
 def getEndpoints(soup):
     #ATTENTION, la suite de cette fonction ne marche que pour mon site, c'est un exemple
     #l'exercice etant de refaire une fonction pour VOTRE site a scraper
-    ul = soup.find('ul', { "class": "o-grid u-list-unstyled o-grid--3 o-grid--2@md o-grid--1@sm"})
-    lis = ul.findAll('li')
+    ul = soup.findAll('ul', { "class": "bi-list"})
+    lis = ul.findAll('li', { "class": "bi bi-generic "})
     links = []
     for li in lis:
         a = li.find('a')
